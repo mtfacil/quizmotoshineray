@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz Shineray Moto Fácil - Gabryel</title>
+
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '853034203753583');
+  </script>
+
+  <style>
+    :root{
+      --brand:#d90404;
+      --brand-dark:#a10303;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --green:#16a34a;
+      --green-dark:#15803d;
+      --blue:#2563eb;
+      --blue-dark:#1d4ed8;
+      --soft-red:#fff1f2;
+      --soft-blue:#eff6ff;
+      --soft-green:#f0fdf4;
+      --soft-yellow:#fffbeb;
+      --yellow:#d97706;
+      --yellow-strong:#b45309;
+      --shadow:0 18px 40px rgba(0,0,0,.12);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      padding:24px 12px;
+      background:radial-gradient(circle at top,#ffe2e2 0%,#f8fafc 38%,#e5e7eb 100%);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+
+    .app{
+      width:100%;
+      max-width:920px;
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.7);
+    }
+
+    .hero{
+      padding:22px 16px 18px;
+      background:linear-gradient(180deg,#ffffff 0%,#fff7f7 100%);
+      border-bottom:1px solid #f1f5f9;
+    }
+
+    @media(min-width:768px){
+      .hero{padding:28px 28px 20px;}
+    }
+
+    .logo-wrap{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      text-align:center;
+    }
+
+    .logo-badge{
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      background:#111;
+      box-shadow:0 10px 22px rgba(0,0,0,.22);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+
+    .logo-badge img{
+      width:78%;
+      height:78%;
+      object-fit:contain;
+    }
+
+    .title{
+      font-size:22px;
+      line-height:1.2;
+      font-weight:900;
+      color:var(--brand-dark);
+      margin:0;
+    }
+
+    .subtitle{
+      margin:0;
+      max-width:680px;
+      font-size:14px;
+      line-height:1.5;
+      color:var(--muted);
+    }
+
+    .progress-wrap{margin-top:16px}
+
+    .progress-bar{
+      height:8px;
+      width:100%;
+      background:#e5e7eb;
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .progress-fill{
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg,#22c55e,#16a34a);
+      border-radius:999px;
+      transition:width .25s ease;
+    }
+
+    .progress-label{
+      margin-top:6px;
+      text-align:center;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#4b5563;
+    }
+
+    .content{
+      padding:18px 16px 28px;
+    }
+
+    @media(min-width:768px){
+      .content{padding:24px 28px 32px;}
+    }
+
+    .view{display:none}
+    .view.active{display:block}
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#e0f2fe;
+      color:#0f172a;
+      font-size:11px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:12px;
+    }
+
+    .question-title{
+      font-size:24px;
+      line-height:1.25;
+      font-weight:900;
+      text-align:center;
+      margin:0 0 10px;
+      color:#111827;
+    }
+
+    .question-desc{
+      font-size:14px;
+      line-height:1.55;
+      text-align:center;
+      color:#4b5563;
+      max-width:660px;
+      margin:0 auto 16px;
+    }
+
+    .options{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .option-btn{
+      width:100%;
+      border:0;
+      cursor:pointer;
+      text-align:left;
+      border-radius:999px;
+      padding:14px 18px;
+      background:var(--green);
+      color:#fff;
+      font-size:15px;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 8px 18px rgba(22,163,74,.26);
+      transition:transform .08s ease, box-shadow .12s ease, background .12s ease;
+    }
+
+    .option-btn:hover{
+      transform:translateY(-1px);
+      background:var(--green-dark);
+      box-shadow:0 12px 22px rgba(22,163,74,.30);
+    }
+
+    .option-btn .emoji{
+      font-size:18px;
+      flex:0 0 auto;
+    }
+
+    .small-hint{
+      margin-top:12px;
+      text-align:center;
+      font-size:12px;
+      color:#6b7280;
+    }
+
+    .box{
+      border-radius:20px;
+      padding:18px 16px 20px;
+      border:1px solid var(--line);
+      box-shadow:0 10px 28px rgba(0,0,0,.05);
+    }
+
+    .catalog-box{background:var(--soft-blue)}
+    .instagram-box{background:var(--soft-red)}
+    .seller-box{background:var(--soft-green)}
+
+    .box-title{
+      font-size:22px;
+      font-weight:900;
+      line-height:1.2;
+      margin:0 0 8px;
+      text-align:center;
+    }
+
+    .catalog-box .box-title{color:#1d4ed8}
+    .instagram-box .box-title{color:#9f1239}
+    .seller-box .box-title{color:#166534}
+
+    .box-text{
+      font-size:14px;
+      line-height:1.6;
+      color:#374151;
+      text-align:center;
+      margin:0 auto 12px;
+      max-width:720px;
+    }
+
+    .summary{
+      margin:14px 0 0;
+      padding:14px;
+      border-radius:16px;
+      background:#fff;
+      border:1px dashed #cbd5e1;
+    }
+
+    .summary-title{
+      font-size:13px;
+      font-weight:900;
+      margin-bottom:8px;
+      color:#0f172a;
+    }
+
+    .summary-list{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+    }
+
+    @media(min-width:700px){
+      .summary-list{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    .summary-item{
+      font-size:13px;
+      line-height:1.45;
+      color:#334155;
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      border-radius:12px;
+      padding:10px 12px;
+    }
+
+    .moto-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    @media(min-width:560px){
+      .moto-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+
+    @media(min-width:860px){
+      .moto-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+    }
+
+    .moto-card{
+      background:#fff;
+      border:1px solid #dbeafe;
+      border-radius:18px;
+      padding:12px;
+      box-shadow:0 12px 24px rgba(37,99,235,.08);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      transition:.15s ease;
+    }
+
+    .moto-card.selected{
+      outline:3px solid rgba(37,99,235,.18);
+      border-color:#93c5fd;
+      box-shadow:0 18px 32px rgba(37,99,235,.16);
+    }
+
+    .moto-card img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:14px;
+      background:#f3f4f6;
+    }
+
+    .moto-name{
+      font-size:16px;
+      font-weight:900;
+      color:#0f172a;
+      line-height:1.2;
+    }
+
+    .moto-price{
+      font-size:14px;
+      font-weight:800;
+      color:#16a34a;
+    }
+
+    .moto-meta{
+      font-size:12px;
+      line-height:1.45;
+      color:#64748b;
+      min-height:34px;
+    }
+
+    .moto-select-btn{
+      width:100%;
+      border:0;
+      border-radius:999px;
+      padding:12px 14px;
+      background:var(--blue);
+      color:#fff;
+      font-size:13px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 10px 20px rgba(37,99,235,.20);
+      transition:.12s ease;
+    }
+
+    .moto-select-btn:hover{
+      background:var(--blue-dark);
+    }
+
+    .after-catalog-actions{
+      margin-top:18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    @media(min-width:640px){
+      .after-catalog-actions{
+        flex-direction:row;
+      }
+    }
+
+    .cta-btn{
+      width:100%;
+      border:0;
+      border-radius:999px;
+      padding:14px 16px;
+      font-size:15px;
+      font-weight:900;
+      cursor:pointer;
+      text-decoration:none;
+      text-align:center;
+      transition:transform .08s ease, box-shadow .12s ease, opacity .12s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .cta-btn:hover{transform:translateY(-1px)}
+
+    .cta-primary{
+      color:#fff;
+      background:var(--green);
+      box-shadow:0 12px 24px rgba(22,163,74,.25);
+    }
+
+    .cta-primary:hover{background:var(--green-dark)}
+
+    .cta-secondary{
+      color:#fff;
+      background:var(--blue);
+      box-shadow:0 12px 24px rgba(37,99,235,.24);
+    }
+
+    .cta-secondary:hover{background:var(--blue-dark)}
+
+    .seller-section{
+      margin-top:18px;
+      display:none;
+    }
+
+    .seller-section.visible{
+      display:block;
+      animation:fadeIn .25s ease;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .seller-card{
+      margin-top:16px;
+      padding:14px;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid #bbf7d0;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      box-shadow:0 10px 24px rgba(22,163,74,.08);
+    }
+
+    .seller-avatar{
+      width:56px;
+      height:56px;
+      border-radius:16px;
+      overflow:hidden;
+      background:#e5e7eb;
+      flex:0 0 auto;
+    }
+
+    .seller-avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .seller-info{
+      flex:1;
+      min-width:0;
+    }
+
+    .seller-name{
+      font-size:15px;
+      font-weight:900;
+      color:#0f172a;
+      margin-bottom:3px;
+    }
+
+    .seller-role{
+      font-size:12px;
+      color:#64748b;
+    }
+
+    .selected-moto-box{
+      margin-top:16px;
+      padding:14px;
+      border-radius:16px;
+      border:1px dashed #86efac;
+      background:#fff;
+    }
+
+    .selected-moto-title{
+      font-size:13px;
+      font-weight:900;
+      color:#0f172a;
+      margin-bottom:10px;
+    }
+
+    .selected-moto-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .selected-moto-thumb{
+      width:74px;
+      height:74px;
+      border-radius:14px;
+      object-fit:cover;
+      background:#f3f4f6;
+      border:1px solid #e5e7eb;
+      flex:0 0 auto;
+    }
+
+    .selected-moto-name{
+      font-size:16px;
+      font-weight:900;
+      color:#0f172a;
+      margin-bottom:4px;
+    }
+
+    .selected-moto-price{
+      font-size:14px;
+      font-weight:800;
+      color:#16a34a;
+    }
+
+    .selected-moto-note{
+      margin-top:8px;
+      font-size:12px;
+      color:#64748b;
+      line-height:1.5;
+    }
+
+    .link-note{
+      margin-top:12px;
+      text-align:center;
+      font-size:12px;
+      color:#6b7280;
+      line-height:1.5;
+    }
+
+    .restart{
+      margin-top:16px;
+      text-align:center;
+      font-size:12px;
+      color:#6b7280;
+      text-decoration:underline;
+      cursor:pointer;
+      user-select:none;
+    }
+
+    .badge-inline{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#dcfce7;
+      color:#166534;
+      font-size:12px;
+      font-weight:800;
+      margin:0 auto 10px;
+    }
+
+    .badge-finance{
+      background:#fef3c7;
+      color:#92400e;
+    }
+
+    .center{text-align:center}
+  </style>
+</head>
+<body>
+
+<noscript>
+  <img height="1" width="1" style="display:none"
+       src="https://www.facebook.com/tr?id=853034203753583&ev=PageView&noscript=1"/>
+</noscript>
+
+<div class="app">
+  <div class="hero">
+    <div class="logo-wrap">
+      <div class="logo-badge">
+        <img src="logo.png" alt="Shineray Moto Fácil">
+      </div>
+      <h1 class="title">Descubra qual Shineray combina mais com você</h1>
+      <p class="subtitle">
+        Responda rapidinho, veja os modelos com preços e, se fizer sentido pro seu perfil, fale direto com o consultor Gabryel.
+      </p>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">Pergunta 1 de 6</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="view active" id="quizView">
+      <div class="pill" id="questionTag">📋 Pergunta</div>
+      <h2 class="question-title" id="questionTitle"></h2>
+      <p class="question-desc" id="questionDesc"></p>
+      <div class="options" id="optionsWrap"></div>
+      <div class="small-hint">Toque em uma opção para continuar.</div>
+    </div>
+
+    <div class="view" id="catalogView">
+      <div class="box catalog-box">
+        <h2 class="box-title">Essas motos podem fazer sentido pra você</h2>
+        <p class="box-text" id="catalogText"></p>
+
+        <div class="summary">
+          <div class="summary-title">Resumo do seu perfil</div>
+          <div class="summary-list" id="catalogSummary"></div>
+        </div>
+
+        <div class="moto-grid" id="motoGrid"></div>
+
+        <div class="after-catalog-actions">
+          <button class="cta-btn cta-secondary" id="nextStepBtn">
+            Continuar
+          </button>
+        </div>
+
+        <div class="seller-section" id="instagramSection">
+          <div class="box instagram-box" style="margin-top:18px;">
+            <h2 class="box-title">Acompanhe nossas novidades no Instagram</h2>
+            <p class="box-text">
+              Pelo seu momento, o melhor caminho agora é acompanhar nossas novidades, ofertas e modelos no Instagram. Quando quiser avançar, nosso atendimento pode te direcionar pro consultor certo.
+            </p>
+
+            <div class="after-catalog-actions">
+              <a href="#" class="cta-btn cta-secondary" id="instagramBtn" target="_blank" rel="noopener">
+                📲 Ir para o Instagram
+              </a>
+            </div>
+
+            <div class="link-note">
+              Nesta versão, o WhatsApp do vendedor fica liberado apenas para leads curiosos não qualificados.
+            </div>
+          </div>
+        </div>
+
+        <div class="seller-section" id="sellerSection">
+          <div class="box seller-box" id="sellerBoxAnchor" style="margin-top:18px;">
+            <div class="center">
+              <div class="badge-inline" id="sellerBadge">✅ Perfil liberado para atendimento com consultor</div>
+            </div>
+
+            <h2 class="box-title" id="sellerStageTitle">Agora finalize com o Gabryel</h2>
+            <p class="box-text" id="sellerStageText">
+              Sua moto de interesse já foi separada. O WhatsApp abaixo vai abrir com suas respostas e com a moto escolhida para agilizar o atendimento.
+            </p>
+
+            <div class="selected-moto-box" id="selectedMotoBox" style="display:none;">
+              <div class="selected-moto-title" id="selectedMotoBoxTitle">Moto selecionada</div>
+              <div class="selected-moto-row">
+                <img class="selected-moto-thumb" id="selectedMotoThumb" src="" alt="">
+                <div>
+                  <div class="selected-moto-name" id="selectedMotoName"></div>
+                  <div class="selected-moto-price" id="selectedMotoPrice"></div>
+                </div>
+              </div>
+              <div class="selected-moto-note" id="selectedMotoNote">
+                O vendedor vai receber sua moto escolhida e seu perfil do quiz já preenchidos.
+              </div>
+            </div>
+
+            <div class="seller-card">
+              <div class="seller-avatar">
+                <img id="sellerAvatar" src="bruno.png" alt="Gabriel">
+              </div>
+              <div class="seller-info">
+                <div class="seller-name" id="sellerName">bruno (Teixeira)</div>
+                <div class="seller-role">Consultor de Vendas</div>
+              </div>
+            </div>
+
+            <div class="after-catalog-actions">
+              <a href="#" class="cta-btn cta-primary" id="sellerWhatsBtn">
+                💬 Falar com o Bruno no WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="restart" id="restartBtn">Refazer quiz</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const CONFIG = {
+    seller: {
+      name: 'bruno (Teixeira)',
+      shortName: 'Bruno',
+      phone: '557398074154',
+      avatar: 'bruno.png',
+      role: 'Consultor de Vendas'
+    },
+
+    instagramUrl: 'https://www.instagram.com/shineray.motofacil/',
+    backendTrackUrl: '/api/track',
+    leadTtlMs: 15 * 24 * 60 * 60 * 1000,
+
+    qualificationRules: {
+      minimumScoreToSeller: 6
+    }
+  };
+
+  // REMOVIDAS APENAS: PT1S e Denver
+  const MOTOS = [
+    { name: 'JET 125SS', image: 'jet125.png', price: 'R$ 12.990,00', tag: 'Scooter automática para o dia a dia' },
+    { name: 'JET 50S', image: 'moto-jet-50s.png', price: 'R$ 8.990,00', tag: 'Cinquentinha leve e econômica' },
+    { name: 'SHI 175 EFI', image: 'moto-shi-175-efi.png', price: 'R$ 17.990,00', tag: 'Mais presença, conforto e desempenho' },
+    { name: 'JEF 150', image: 'moto-jef-150.png', price: 'R$ 14.990,00', tag: 'Boa para rotina intensa e trabalho' },
+    { name: 'Storm 200', image: 'Storm200.png', price: 'R$ 18.990,00', tag: 'Pegada mais robusta para uso misto' },
+    { name: 'Flash 250', image: 'flash250.png', price: 'R$ 21.990,00', tag: 'Mais potência e presença visual' },
+    { name: 'Phoenix', image: 'phoenix.png', price: 'R$ 9.490,00', tag: 'Entrada econômica para mobilidade' },
+    { name: 'Urban', image: 'Urban.png', price: 'R$ 13.990,00', tag: 'Praticidade e conforto urbano' },
+    { name: 'SHI 250', image: 'shi250.png', price: 'R$ 24.990,00', tag: 'Categoria superior para quem quer mais moto' },
+    { name: 'Rio 125', image: 'Rio125.png', price: 'R$ 11.999,00', tag: 'Scooter prática para uso urbano' },
+    { name: 'Titanium 250', image: 'Titanium250.png', price: 'R$ 25.990,00', tag: 'Categoria premium para quem quer mais moto' }
+  ];
+
+  const QUESTIONS = [
+    {
+      key: 'objective',
+      tag: 'Pergunta',
+      title: 'O que mais te chamou atenção agora?',
+      desc: 'Quero te mostrar o caminho mais certo conforme seu momento.',
+      options: [
+        { value: 'buy_soon', emoji: '🔥', label: 'Quero ver uma moto para resolver isso logo', score: 3 },
+        { value: 'compare', emoji: '🧐', label: 'Estou comparando modelos e condições', score: 2 },
+        { value: 'curious', emoji: '👀', label: 'Só quero conhecer melhor as motos', score: 0, curious: true }
+      ]
+    },
+    {
+      key: 'timing',
+      tag: 'Pergunta',
+      title: 'Em quanto tempo você pretende resolver isso?',
+      desc: 'Essa resposta ajuda a ajustar o atendimento.',
+      options: [
+        { value: 'week', emoji: '⚡', label: 'Hoje ou ainda esta semana', score: 3 },
+        { value: 'month', emoji: '📅', label: 'Ainda este mês', score: 2 },
+        { value: 'later', emoji: '🕒', label: 'Mais pra frente, só pesquisando por enquanto', score: 0, curious: true }
+      ]
+    },
+    {
+      key: 'use',
+      tag: 'Pergunta',
+      title: 'Como essa moto entraria na sua rotina?',
+      desc: 'Quero te mostrar modelos que façam sentido no uso real.',
+      options: [
+        { value: 'work', emoji: '💼', label: 'Para trabalho e correria do dia a dia', score: 2 },
+        { value: 'mobility', emoji: '🏙️', label: 'Para locomoção e praticidade', score: 2 },
+        { value: 'casual', emoji: '😎', label: 'Mais por estilo ou uso eventual', score: 0, curious: true }
+      ]
+    },
+    {
+      key: 'payment',
+      tag: 'Pergunta',
+      title: 'Qual cenário faz mais sentido pra você hoje?',
+      desc: 'Não é proposta fechada, só direcionamento.',
+      options: [
+        { value: 'installments', emoji: '💳', label: 'Parcelas que caibam no bolso', score: 2 },
+        { value: 'entry', emoji: '💰', label: 'Tenho entrada para facilitar', score: 3 },
+        { value: 'cash', emoji: '✅', label: 'Posso avaliar à vista ou cartão', score: 3 },
+        { value: 'financing', emoji: '🏦', label: 'Quero ver opções de financiamento', score: 3, jumpToCatalog: true },
+        { value: 'noidea', emoji: '🤔', label: 'Ainda não pensei nisso', score: 0 }
+      ]
+    },
+    {
+      key: 'reaction',
+      tag: 'Pergunta',
+      title: 'Se aparecer uma condição boa, qual seria sua reação?',
+      desc: 'Isso me ajuda a entender seu momento sem te enrolar.',
+      options: [
+        { value: 'talk_now', emoji: '📲', label: 'Eu já falaria com um consultor', score: 3 },
+        { value: 'analyze', emoji: '📌', label: 'Eu analisaria com calma', score: 1 },
+        { value: 'simulate', emoji: '🏦', label: 'Eu faria uma simulação primeiro', score: 2 },
+        { value: 'follow', emoji: '❤️', label: 'Eu só acompanharia as novidades por enquanto', score: 0, curious: true }
+      ]
+    },
+    {
+      key: 'profile',
+      tag: 'Final',
+      title: 'Qual perfil de moto mais combina com você hoje?',
+      desc: 'Com isso eu já separo opções mais alinhadas.',
+      options: [
+        { value: 'economy', emoji: '⛽', label: 'Economia e praticidade', score: 2 },
+        { value: 'balance', emoji: '⚖️', label: 'Equilíbrio entre conforto e custo', score: 2 },
+        { value: 'power', emoji: '🏍️', label: 'Mais presença e potência', score: 2 }
+      ]
+    }
+  ];
+
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+
+  const quizView = document.getElementById('quizView');
+  const catalogView = document.getElementById('catalogView');
+
+  const questionTag = document.getElementById('questionTag');
+  const questionTitle = document.getElementById('questionTitle');
+  const questionDesc = document.getElementById('questionDesc');
+  const optionsWrap = document.getElementById('optionsWrap');
+
+  const catalogText = document.getElementById('catalogText');
+  const catalogSummary = document.getElementById('catalogSummary');
+  const motoGrid = document.getElementById('motoGrid');
+
+  const nextStepBtn = document.getElementById('nextStepBtn');
+  const instagramSection = document.getElementById('instagramSection');
+  const sellerSection = document.getElementById('sellerSection');
+
+  const instagramBtn = document.getElementById('instagramBtn');
+  const sellerWhatsBtn = document.getElementById('sellerWhatsBtn');
+
+  const selectedMotoBox = document.getElementById('selectedMotoBox');
+  const selectedMotoThumb = document.getElementById('selectedMotoThumb');
+  const selectedMotoName = document.getElementById('selectedMotoName');
+  const selectedMotoPrice = document.getElementById('selectedMotoPrice');
+  const selectedMotoBoxTitle = document.getElementById('selectedMotoBoxTitle');
+  const selectedMotoNote = document.getElementById('selectedMotoNote');
+
+  const sellerAvatar = document.getElementById('sellerAvatar');
+  const sellerName = document.getElementById('sellerName');
+  const sellerBoxAnchor = document.getElementById('sellerBoxAnchor');
+  const sellerBadge = document.getElementById('sellerBadge');
+  const sellerStageTitle = document.getElementById('sellerStageTitle');
+  const sellerStageText = document.getElementById('sellerStageText');
+
+  const restartBtn = document.getElementById('restartBtn');
+
+  let currentStep = 0;
+  let answers = {};
+  let selectedMoto = null;
+  let quizStarted = false;
+  let currentLeadType = 'curious';
+
+  sellerAvatar.src = CONFIG.seller.avatar;
+  sellerAvatar.alt = CONFIG.seller.shortName;
+  sellerName.textContent = CONFIG.seller.name;
+  instagramBtn.href = CONFIG.instagramUrl;
+
+  const LEAD_LS_KEY = 'mf_gabryel_quiz_lead_tracked';
+
+  function hasRecentLead(){
+    try{
+      const raw = localStorage.getItem(LEAD_LS_KEY);
+      if(!raw) return false;
+      const ts = parseInt(raw, 10);
+      if(isNaN(ts)) return false;
+      return (Date.now() - ts) < CONFIG.leadTtlMs;
+    }catch(e){
+      return false;
+    }
+  }
+
+  function markLead(){
+    try{
+      localStorage.setItem(LEAD_LS_KEY, String(Date.now()));
+    }catch(e){}
+  }
+
+  function sendBackendEvent(payload){
+    try{
+      fetch(CONFIG.backendTrackUrl, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      }).catch(()=>{});
+    }catch(e){}
+  }
+
+  function trackSellerLead(moto){
+    if(typeof fbq !== 'function') return;
+    if(hasRecentLead()) return;
+
+    const payload = {
+      content_name: 'Quiz Shineray Moto Fácil - Gabryel',
+      content_category: moto ? moto.name : 'Sem moto selecionada',
+      seller_name: CONFIG.seller.name
+    };
+
+    fbq('track', 'PageView', payload);
+    fbq('track', 'ViewContent', payload);
+    fbq('track', 'Lead', payload);
+
+    markLead();
+  }
+
+  function setView(name){
+    quizView.classList.remove('active');
+    catalogView.classList.remove('active');
+
+    if(name === 'quiz') quizView.classList.add('active');
+    if(name === 'catalog') catalogView.classList.add('active');
+  }
+
+  function getOptionLabel(questionKey, optionValue){
+    const q = QUESTIONS.find(item => item.key === questionKey);
+    if(!q) return optionValue || '-';
+    const opt = q.options.find(item => item.value === optionValue);
+    return opt ? opt.label : optionValue;
+  }
+
+  function renderSummary(targetEl){
+    const items = [
+      {label:'Objetivo', value:getOptionLabel('objective', answers.objective)},
+      {label:'Prazo', value:getOptionLabel('timing', answers.timing)},
+      {label:'Uso', value:getOptionLabel('use', answers.use)},
+      {label:'Pagamento', value:getOptionLabel('payment', answers.payment)},
+      {label:'Reação', value:answers.reaction ? getOptionLabel('reaction', answers.reaction) : 'Não respondido'},
+      {label:'Perfil', value:answers.profile ? getOptionLabel('profile', answers.profile) : 'Não respondido'}
+    ];
+
+    targetEl.innerHTML = items.map(item => `
+      <div class="summary-item">
+        <strong>${item.label}:</strong><br>${item.value}
+      </div>
+    `).join('');
+  }
+
+  function getMotoByName(name){
+    return MOTOS.find(m => m.name === name) || null;
+  }
+
+  function hasFinanceIntent(){
+    return (
+      answers.payment === 'financing' ||
+      answers.reaction === 'simulate'
+    );
+  }
+
+  function calculateQualification(){
+    let score = 0;
+    let curiousFlags = 0;
+    let jumpFinancing = answers.payment === 'financing';
+
+    QUESTIONS.forEach(q => {
+      const chosen = q.options.find(opt => opt.value === answers[q.key]);
+      if(chosen){
+        score += Number(chosen.score || 0);
+        if(chosen.curious) curiousFlags++;
+      }
+    });
+
+    let leadType = 'curious';
+
+    if(jumpFinancing){
+      leadType = 'qualified';
+    } else if(score >= CONFIG.qualificationRules.minimumScoreToSeller){
+      leadType = 'qualified';
+    } else if(score >= 3) {
+      leadType = 'warm';
+    } else {
+      leadType = 'curious';
+    }
+
+    if(
+      !jumpFinancing &&
+      (
+        answers.objective === 'curious' ||
+        answers.timing === 'later' ||
+        answers.reaction === 'follow'
+      )
+    ){
+      leadType = 'curious';
+    }
+
+    return { score, curiousFlags, leadType };
+  }
+
+  function recommendMotos(){
+    // MANTIDO: todas as motos aparecem para lead qualificado em qualquer método
+    return [...MOTOS];
+  }
+
+  function buildWhatsMessage(){
+    const motoText = selectedMoto ? `${selectedMoto.name} (${selectedMoto.price})` : 'Ainda não selecionada';
+
+    return `Olá ${CONFIG.seller.shortName}! Fiz o Quiz da Shineray Moto Fácil e quero atendimento.
+
+Moto de interesse:
+- ${motoText}
+
+Meu perfil no quiz:
+- Objetivo: ${getOptionLabel('objective', answers.objective)}
+- Prazo: ${getOptionLabel('timing', answers.timing)}
+- Uso principal: ${getOptionLabel('use', answers.use)}
+- Pagamento: ${getOptionLabel('payment', answers.payment)}
+- Reação a boa condição: ${answers.reaction ? getOptionLabel('reaction', answers.reaction) : 'Não respondeu'}
+- Perfil desejado: ${answers.profile ? getOptionLabel('profile', answers.profile) : 'Não respondeu'}
+- Interesse em financiamento: ${hasFinanceIntent() ? 'Sim' : 'Não'}
+
+Pode me passar as melhores opções para essa moto?`;
+  }
+
+  function updateWhatsButton(){
+    const text = buildWhatsMessage();
+    sellerWhatsBtn.href = `https://wa.me/${CONFIG.seller.phone}?text=${encodeURIComponent(text)}`;
+  }
+
+  function renderSellerStageByIntent(){
+    if(hasFinanceIntent()){
+      sellerBadge.textContent = '🏦 Perfil liberado para atendimento com intenção de financiamento';
+      sellerBadge.classList.add('badge-finance');
+      sellerStageTitle.textContent = 'Agora finalize com o Gabryel';
+      sellerStageText.textContent = 'Você marcou interesse em financiamento no quiz. Agora, após escolher a moto, o atendimento segue normalmente com o Gabryel no WhatsApp.';
+      selectedMotoBoxTitle.textContent = 'Moto selecionada';
+      selectedMotoNote.textContent = 'O vendedor vai receber sua moto escolhida e a informação de que você demonstrou interesse em financiamento.';
+    } else {
+      sellerBadge.textContent = '✅ Perfil liberado para atendimento com consultor';
+      sellerBadge.classList.remove('badge-finance');
+      sellerStageTitle.textContent = 'Agora finalize com o Gabryel';
+      sellerStageText.textContent = 'Sua moto de interesse já foi separada. O WhatsApp abaixo vai abrir com suas respostas e com a moto escolhida para agilizar o atendimento.';
+      selectedMotoBoxTitle.textContent = 'Moto selecionada';
+      selectedMotoNote.textContent = 'O vendedor vai receber sua moto escolhida e seu perfil do quiz já preenchidos.';
+    }
+  }
+
+  function openSellerStage(motoName){
+    const moto = getMotoByName(motoName);
+    if(!moto) return;
+
+    selectedMoto = moto;
+
+    document.querySelectorAll('.moto-card').forEach(card => {
+      card.classList.toggle('selected', card.getAttribute('data-moto') === moto.name);
+    });
+
+    renderSellerStageByIntent();
+
+    selectedMotoBox.style.display = 'block';
+    selectedMotoThumb.src = moto.image;
+    selectedMotoThumb.alt = moto.name;
+    selectedMotoName.textContent = moto.name;
+    selectedMotoPrice.textContent = moto.price;
+    updateWhatsButton();
+
+    sellerSection.classList.add('visible');
+    instagramSection.classList.remove('visible');
+
+    sendBackendEvent({
+      type:'seller_stage_open',
+      seller:CONFIG.seller.name,
+      leadType:currentLeadType,
+      moto:moto.name,
+      price:moto.price,
+      financeIntent: hasFinanceIntent()
+    });
+
+    setTimeout(() => {
+      sellerBoxAnchor.scrollIntoView({ behavior:'smooth', block:'start' });
+    }, 120);
+  }
+
+  function renderMotoGrid(){
+    const recommended = recommendMotos();
+
+    motoGrid.innerHTML = recommended.map(moto => `
+      <div class="moto-card" data-moto="${moto.name}">
+        <img src="${moto.image}" alt="${moto.name}">
+        <div class="moto-name">${moto.name}</div>
+        <div class="moto-price">${moto.price}</div>
+        <div class="moto-meta">${moto.tag}</div>
+        <button class="moto-select-btn" type="button" data-moto-select="${moto.name}">
+          Escolher esta moto
+        </button>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('[data-moto-select]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const motoName = btn.getAttribute('data-moto-select');
+
+        sendBackendEvent({
+          type:'moto_select',
+          seller:CONFIG.seller.name,
+          leadType:currentLeadType,
+          moto:motoName,
+          financeIntent: hasFinanceIntent()
+        });
+
+        if(currentLeadType === 'curious'){
+          document.querySelectorAll('.moto-card').forEach(card => {
+            card.classList.toggle('selected', card.getAttribute('data-moto') === motoName);
+          });
+
+          nextStepBtn.textContent = 'Continuar';
+          nextStepBtn.style.display = 'inline-flex';
+          selectedMoto = getMotoByName(motoName);
+
+          sendBackendEvent({
+            type:'curious_moto_select',
+            seller:CONFIG.seller.name,
+            moto:motoName
+          });
+          return;
+        }
+
+        openSellerStage(motoName);
+      });
+    });
+  }
+
+  function renderQuestion(){
+    const q = QUESTIONS[currentStep];
+    const total = QUESTIONS.length;
+    const percent = (currentStep / total) * 100;
+
+    if(!quizStarted && currentStep === 0){
+      quizStarted = true;
+      sendBackendEvent({
+        type:'quiz_start',
+        seller:CONFIG.seller.name
+      });
+    }
+
+    sendBackendEvent({
+      type:'step_view',
+      seller:CONFIG.seller.name,
+      step:currentStep + 1,
+      questionKey:q.key
+    });
+
+    progressFill.style.width = `${percent}%`;
+    progressLabel.textContent = `Pergunta ${currentStep + 1} de ${total}`;
+
+    questionTag.textContent = `📋 ${q.tag}`;
+    questionTitle.textContent = q.title;
+    questionDesc.textContent = q.desc;
+
+    optionsWrap.innerHTML = q.options.map(opt => `
+      <button class="option-btn" type="button" data-value="${opt.value}">
+        <span class="emoji">${opt.emoji}</span>
+        <span>${opt.label}</span>
+      </button>
+    `).join('');
+
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const value = btn.getAttribute('data-value');
+        answers[q.key] = value;
+
+        sendBackendEvent({
+          type:'answer',
+          seller:CONFIG.seller.name,
+          questionKey:q.key,
+          optionValue:value
+        });
+
+        const chosen = q.options.find(opt => opt.value === value);
+
+        if(q.key === 'payment' && chosen && chosen.jumpToCatalog){
+          progressFill.style.width = '100%';
+          progressLabel.textContent = 'Quiz concluído';
+          showCatalog();
+          return;
+        }
+
+        nextStep();
+      });
+    });
+
+    setView('quiz');
+  }
+
+  function showCatalog(){
+    const qual = calculateQualification();
+    currentLeadType = qual.leadType;
+
+    progressFill.style.width = '100%';
+    progressLabel.textContent = 'Quiz concluído';
+
+    catalogText.textContent =
+      'Com base nas suas respostas, separamos modelos que podem combinar com o que você procura. Veja as opções, confira os preços e escolha a que mais te interessar.';
+
+    renderSummary(catalogSummary);
+    renderMotoGrid();
+
+    sellerSection.classList.remove('visible');
+    instagramSection.classList.remove('visible');
+
+    selectedMoto = null;
+    selectedMotoBox.style.display = 'none';
+
+    nextStepBtn.style.display = currentLeadType === 'curious' ? 'inline-flex' : 'none';
+    nextStepBtn.textContent = 'Continuar';
+
+    sendBackendEvent({
+      type:'catalog_view',
+      seller:CONFIG.seller.name,
+      score:qual.score,
+      curiousFlags:qual.curiousFlags,
+      leadType:qual.leadType,
+      financeIntent: hasFinanceIntent(),
+      jumpedFromPayment: answers.payment === 'financing'
+    });
+
+    setView('catalog');
+  }
+
+  function nextStep(){
+    if(currentStep < QUESTIONS.length - 1){
+      currentStep++;
+      renderQuestion();
+    } else {
+      showCatalog();
+    }
+  }
+
+  function resetQuiz(){
+    currentStep = 0;
+    answers = {};
+    selectedMoto = null;
+    quizStarted = false;
+    currentLeadType = 'curious';
+
+    progressFill.style.width = '0%';
+    progressLabel.textContent = `Pergunta 1 de ${QUESTIONS.length}`;
+
+    sellerSection.classList.remove('visible');
+    instagramSection.classList.remove('visible');
+    selectedMotoBox.style.display = 'none';
+
+    renderQuestion();
+  }
+
+  nextStepBtn.addEventListener('click', () => {
+    if(currentLeadType !== 'curious') return;
+
+    instagramSection.classList.add('visible');
+    sellerSection.classList.remove('visible');
+
+    sendBackendEvent({
+      type:'curious_continue_to_instagram_stage',
+      seller:CONFIG.seller.name,
+      moto:selectedMoto ? selectedMoto.name : null
+    });
+
+    setTimeout(() => {
+      instagramSection.scrollIntoView({ behavior:'smooth', block:'start' });
+    }, 120);
+  });
+
+  instagramBtn.addEventListener('click', () => {
+    sendBackendEvent({
+      type:'instagram_click',
+      seller:CONFIG.seller.name,
+      moto:selectedMoto ? selectedMoto.name : null
+    });
+  });
+
+  sellerWhatsBtn.addEventListener('click', () => {
+    if(currentLeadType === 'curious') return;
+
+    trackSellerLead(selectedMoto);
+
+    sendBackendEvent({
+      type:'seller_whatsapp_click',
+      seller:CONFIG.seller.name,
+      leadType:currentLeadType,
+      moto:selectedMoto ? selectedMoto.name : null,
+      price:selectedMoto ? selectedMoto.price : null,
+      financeIntent: hasFinanceIntent()
+    });
+  });
+
+  restartBtn.addEventListener('click', resetQuiz);
+
+  renderQuestion();
+</script>
+
+</body>
+</html>
