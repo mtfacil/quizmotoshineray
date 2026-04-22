@@ -17,6 +17,7 @@
     }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
     fbq('init', '853034203753583');
+    fbq('track', 'PageView');
   </script>
 
   <style>
@@ -687,7 +688,7 @@
             </div>
 
             <div class="after-catalog-actions">
-              <a href="#" class="cta-btn cta-primary" id="sellerWhatsBtn">
+              <a href="#" class="cta-btn cta-primary" id="sellerWhatsBtn" target="_blank" rel="noopener">
                 💬 Falar com o Bruno no WhatsApp
               </a>
             </div>
@@ -703,7 +704,7 @@
 <script>
   const CONFIG = {
     seller: {
-      name: 'bruno (Teixeira)',
+      name: 'Bruno (Teixeira)',
       shortName: 'Bruno',
       phone: '557398074154',
       avatar: 'bruno.png',
@@ -711,21 +712,18 @@
     },
 
     instagramUrl: 'https://www.instagram.com/shineray.motofacil/',
-    backendTrackUrl: '/api/track',
-    leadTtlMs: 15 * 24 * 60 * 60 * 1000,
 
     qualificationRules: {
       minimumScoreToSeller: 6
     }
   };
 
-  // REMOVIDAS APENAS: PT1S e Denver
   const MOTOS = [
-    { name: 'JET 125SS', image: 'jet125.png', price: 'R$ 11.590,00', tag: 'Scooter automática para o dia a dia' },
+    { name: 'JET 125SS', image: 'jet125.png', price: 'R$ 11.490,00', tag: 'Scooter automática para o dia a dia' },
     { name: 'JET 50S', image: 'moto-jet-50s.png', price: 'R$ 10.990,00', tag: 'Cinquentinha leve e econômica' },
     { name: 'SHI 175 EFI', image: 'moto-shi-175-efi.png', price: 'R$ 20.490,00', tag: 'Mais presença, conforto e desempenho' },
     { name: 'JEF 150', image: 'moto-jef-150.png', price: 'R$ 16.490,00', tag: 'Boa para rotina intensa e trabalho' },
-    { name: 'Storm 200', image: 'storm200.png', price: 'R$ 24.150,00', tag: 'Pegada mais robusta para uso misto' },
+    { name: 'Storm 200', image: 'storm200.png', price: 'R$ 18.990,00', tag: 'Pegada mais robusta para uso misto' },
     { name: 'Flash 250', image: 'flash250.png', price: 'R$ 22.990,00', tag: 'Mais potência e presença visual' },
     { name: 'Phoenix', image: 'phoenix.png', price: 'R$ 8.990,00', tag: 'Entrada econômica para mobilidade' },
     { name: 'Urban', image: 'Urban.png', price: 'R$ 22.890,00', tag: 'Praticidade e conforto urbano' },
@@ -741,7 +739,7 @@
       title: 'O que mais te chamou atenção agora?',
       desc: 'Quero te mostrar o caminho mais certo conforme seu momento.',
       options: [
-        { value: 'buy_soon', emoji: '🔥', label: 'Tenho interesse em adquirir uma moto para logo!', score: 3 },
+        { value: 'buy_soon', emoji: '🔥', label: 'Quero ver uma moto para resolver isso logo', score: 3 },
         { value: 'compare', emoji: '🧐', label: 'Estou comparando modelos e condições', score: 2 },
         { value: 'curious', emoji: '👀', label: 'Só quero conhecer melhor as motos', score: 0, curious: true }
       ]
@@ -855,51 +853,16 @@
   sellerName.textContent = CONFIG.seller.name;
   instagramBtn.href = CONFIG.instagramUrl;
 
-  const LEAD_LS_KEY = 'mf_gabryel_quiz_lead_tracked';
-
-  function hasRecentLead(){
-    try{
-      const raw = localStorage.getItem(LEAD_LS_KEY);
-      if(!raw) return false;
-      const ts = parseInt(raw, 10);
-      if(isNaN(ts)) return false;
-      return (Date.now() - ts) < CONFIG.leadTtlMs;
-    }catch(e){
-      return false;
-    }
-  }
-
-  function markLead(){
-    try{
-      localStorage.setItem(LEAD_LS_KEY, String(Date.now()));
-    }catch(e){}
-  }
-
-  function sendBackendEvent(payload){
-    try{
-      fetch(CONFIG.backendTrackUrl, {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(payload)
-      }).catch(()=>{});
-    }catch(e){}
-  }
-
-  function trackSellerLead(moto){
+  function trackEventLeadWhats(moto){
     if(typeof fbq !== 'function') return;
-    if(hasRecentLead()) return;
 
     const payload = {
-      content_name: 'Quiz Shineray Moto Fácil - Gabryel',
+      content_name: 'Contato com vendedor - Quiz Shineray Moto Fácil',
       content_category: moto ? moto.name : 'Sem moto selecionada',
       seller_name: CONFIG.seller.name
     };
 
-    fbq('track', 'PageView', payload);
-    fbq('track', 'ViewContent', payload);
     fbq('track', 'Lead', payload);
-
-    markLead();
   }
 
   function setView(name){
@@ -985,7 +948,6 @@
   }
 
   function recommendMotos(){
-    // MANTIDO: todas as motos aparecem para lead qualificado em qualquer método
     return [...MOTOS];
   }
 
@@ -1019,7 +981,7 @@ Pode me passar as melhores opções para essa moto?`;
       sellerBadge.textContent = '🏦 Perfil liberado para atendimento com intenção de financiamento';
       sellerBadge.classList.add('badge-finance');
       sellerStageTitle.textContent = 'Agora finalize com o Bruno';
-      sellerStageText.textContent = 'Você marcou interesse em financiamento no quiz. Agora, após escolher a moto, o atendimento segue normalmente com o Gabryel no WhatsApp.';
+      sellerStageText.textContent = 'Você marcou interesse em financiamento no quiz. Agora, após escolher a moto, o atendimento segue normalmente com o Bruno no WhatsApp.';
       selectedMotoBoxTitle.textContent = 'Moto selecionada';
       selectedMotoNote.textContent = 'O vendedor vai receber sua moto escolhida e a informação de que você demonstrou interesse em financiamento.';
     } else {
@@ -1054,15 +1016,6 @@ Pode me passar as melhores opções para essa moto?`;
     sellerSection.classList.add('visible');
     instagramSection.classList.remove('visible');
 
-    sendBackendEvent({
-      type:'seller_stage_open',
-      seller:CONFIG.seller.name,
-      leadType:currentLeadType,
-      moto:moto.name,
-      price:moto.price,
-      financeIntent: hasFinanceIntent()
-    });
-
     setTimeout(() => {
       sellerBoxAnchor.scrollIntoView({ behavior:'smooth', block:'start' });
     }, 120);
@@ -1087,14 +1040,6 @@ Pode me passar as melhores opções para essa moto?`;
       btn.addEventListener('click', () => {
         const motoName = btn.getAttribute('data-moto-select');
 
-        sendBackendEvent({
-          type:'moto_select',
-          seller:CONFIG.seller.name,
-          leadType:currentLeadType,
-          moto:motoName,
-          financeIntent: hasFinanceIntent()
-        });
-
         if(currentLeadType === 'curious'){
           document.querySelectorAll('.moto-card').forEach(card => {
             card.classList.toggle('selected', card.getAttribute('data-moto') === motoName);
@@ -1103,12 +1048,6 @@ Pode me passar as melhores opções para essa moto?`;
           nextStepBtn.textContent = 'Continuar';
           nextStepBtn.style.display = 'inline-flex';
           selectedMoto = getMotoByName(motoName);
-
-          sendBackendEvent({
-            type:'curious_moto_select',
-            seller:CONFIG.seller.name,
-            moto:motoName
-          });
           return;
         }
 
@@ -1124,18 +1063,7 @@ Pode me passar as melhores opções para essa moto?`;
 
     if(!quizStarted && currentStep === 0){
       quizStarted = true;
-      sendBackendEvent({
-        type:'quiz_start',
-        seller:CONFIG.seller.name
-      });
     }
-
-    sendBackendEvent({
-      type:'step_view',
-      seller:CONFIG.seller.name,
-      step:currentStep + 1,
-      questionKey:q.key
-    });
 
     progressFill.style.width = `${percent}%`;
     progressLabel.textContent = `Pergunta ${currentStep + 1} de ${total}`;
@@ -1155,13 +1083,6 @@ Pode me passar as melhores opções para essa moto?`;
       btn.addEventListener('click', () => {
         const value = btn.getAttribute('data-value');
         answers[q.key] = value;
-
-        sendBackendEvent({
-          type:'answer',
-          seller:CONFIG.seller.name,
-          questionKey:q.key,
-          optionValue:value
-        });
 
         const chosen = q.options.find(opt => opt.value === value);
 
@@ -1201,16 +1122,6 @@ Pode me passar as melhores opções para essa moto?`;
     nextStepBtn.style.display = currentLeadType === 'curious' ? 'inline-flex' : 'none';
     nextStepBtn.textContent = 'Continuar';
 
-    sendBackendEvent({
-      type:'catalog_view',
-      seller:CONFIG.seller.name,
-      score:qual.score,
-      curiousFlags:qual.curiousFlags,
-      leadType:qual.leadType,
-      financeIntent: hasFinanceIntent(),
-      jumpedFromPayment: answers.payment === 'financing'
-    });
-
     setView('catalog');
   }
 
@@ -1246,38 +1157,14 @@ Pode me passar as melhores opções para essa moto?`;
     instagramSection.classList.add('visible');
     sellerSection.classList.remove('visible');
 
-    sendBackendEvent({
-      type:'curious_continue_to_instagram_stage',
-      seller:CONFIG.seller.name,
-      moto:selectedMoto ? selectedMoto.name : null
-    });
-
     setTimeout(() => {
       instagramSection.scrollIntoView({ behavior:'smooth', block:'start' });
     }, 120);
   });
 
-  instagramBtn.addEventListener('click', () => {
-    sendBackendEvent({
-      type:'instagram_click',
-      seller:CONFIG.seller.name,
-      moto:selectedMoto ? selectedMoto.name : null
-    });
-  });
-
   sellerWhatsBtn.addEventListener('click', () => {
     if(currentLeadType === 'curious') return;
-
-    trackSellerLead(selectedMoto);
-
-    sendBackendEvent({
-      type:'seller_whatsapp_click',
-      seller:CONFIG.seller.name,
-      leadType:currentLeadType,
-      moto:selectedMoto ? selectedMoto.name : null,
-      price:selectedMoto ? selectedMoto.price : null,
-      financeIntent: hasFinanceIntent()
-    });
+    trackEventLeadWhats(selectedMoto);
   });
 
   restartBtn.addEventListener('click', resetQuiz);
